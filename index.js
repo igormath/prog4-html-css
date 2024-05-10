@@ -3,28 +3,24 @@ import { products } from "./db-products.js";
 const productsList = document.querySelector(".products__list");
 const productsSubtitle = document.querySelector(".products__subtitle");
 const inputSearch = document.querySelector(".products__search");
+const cartNumber = document.querySelector(".cart__number");
 
-productsList.insertAdjacentHTML("afterbegin", products.map((product) => 
-    `<li class="product">
+window.onload=renderJSON(products);
+
+function renderJSON(jsonInput){
+    productsList.textContent = '';
+    productsList.insertAdjacentHTML("afterbegin", jsonInput.map((product) => 
+        `<li class="product">
     <img class="product__image" src="./assets/produtos/produto${product.id}.png" alt="Produto ${product.id}">
     <h3 class="product__name">${product.name}</h3>
     <p class="product__price">R$${product.price}</p>
     <button class="product__btn">Comprar</button>
     </li>`
 ).join(''))
-
-
-function renderJSON(jsonInput){
-    productsList.textContent = '';
-    productsList.insertAdjacentHTML("afterbegin", jsonInput.map((product) => 
-        `<li class="product">
-        <img class="product__image" src="./assets/produtos/produto${product.id}.png" alt="Produto ${product.id}">
-        <h3 class="product__name">${product.name}</h3>
-        <p class="product__price">R$${product.price}</p>
-        <button class="product__btn">Comprar</button>
-        </li>`
-    ).join(''))
 }
+
+
+const productBtn = document.querySelectorAll(".product__btn");
 
 function productNotFind(){
     productsList.textContent = '';
@@ -67,5 +63,12 @@ function search(searchString){
     
     return filtered;
 }
+
+productBtn.forEach(button => {
+    button.onclick = function(){
+        const cartValue = Number(cartNumber.textContent);
+        cartNumber.textContent = cartValue + 1;
+    }
+})
 
 inputSearch.addEventListener('input', inputHandler);
