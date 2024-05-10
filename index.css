@@ -32,10 +32,20 @@ body{
 }
 
 .header__container-icons{
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-around; */
+  position: relative;
+}
+
+.cart__number{
+  position: absolute;
+  top: 12px; /* Ajuste a posição vertical conforme necessário */
+  right: 0.5vw;
+  color: #2ea828; /* Cor do texto */
+  padding: 5px; /* Espaçamento interno */
+  font-size: 1rem; /* Tamanho da fonte */
 }
 
 .products__search{
@@ -365,5 +375,9 @@ body{
   .products__notfind{
     font-size: 2rem;
     text-align: center;
+  }
+
+  .cart__number{
+    font-size: 2rem; /* Tamanho da fonte */
   }
 }
