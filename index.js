@@ -13,12 +13,11 @@ function renderJSON(jsonInput){
         `<li class="product">
     <img class="product__image" src="./assets/produtos/produto${product.id}.png" alt="Produto ${product.id}">
     <h3 class="product__name">${product.name}</h3>
-    <p class="product__price">R$${product.price}</p>
-    <button class="product__btn">Comprar</button>
+    <p class="product__price">R$${(product.price).toFixed(2)}</p>
+    <a href="./cart.html" class="product__btn" data-product-id=${product.id}>Comprar</a>
     </li>`
 ).join(''))
 }
-
 
 const productBtn = document.querySelectorAll(".product__btn");
 
@@ -65,10 +64,13 @@ function search(searchString){
 }
 
 productBtn.forEach(button => {
-    button.onclick = function(){
-        const cartValue = Number(cartNumber.textContent);
-        cartNumber.textContent = cartValue + 1;
+    button.addEventListener('click', function(){
+        const productId = this.getAttribute('data-product-id');
+        localStorage.setItem('product-id', productId);
+        localStorage.setItem('product-quant', 1);
+        localStorage.setItem('product-price', products[productId - 1].price);
     }
+    )
 })
 
 inputSearch.addEventListener('input', inputHandler);
